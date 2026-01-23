@@ -1,120 +1,51 @@
-## Introduction [![Build Status](https://secure.travis-ci.org/haiwen/seafile.svg?branch=master)](http://travis-ci.org/haiwen/seafile)
+# Git-Friendly Seafile Syncing Client
 
-Seafile is an open source cloud storage system with privacy protection and teamwork features. Collections of files are called libraries. Each library can be synced separately. A library can also be encrypted with a user chosen password. Seafile also allows users to create groups and easily sharing files into groups.
+Seafile is an open-source cloud storage system.  
+Main repository: [haiwen / seafile](https://github.com/haiwen/seafile)
 
+## Background
 
-## Feature Summary
+Several users have reported **Git repository corruption** when syncing repositories with the official Seafile client. Relevant discussions:
 
-Seafile has the following features:
+- [Handling of git repositories](https://forum.seafile.com/t/handling-of-git-repositories)
+- [GitHub issue #2677](https://github.com/haiwen/seafile/issues/2677)
+- [GitHub issue #2833](https://github.com/haiwen/seafile/issues/2833)
 
-### File syncing
+At the time of writing, this issue is considered low priority by the Seafile development team.
 
-1. Selective sync for any folder.
-2. Correctly handles file conflicts based on history instead of timestamp.
-3. Only transfer content delta to the server. Interrupted transfers can be resumed.
-4. Sync with two or more servers.
-5. Sync with existing folders.
+## Purpose
 
+This project provides a **tentative workaround** for the Git corruption issue by offering a modified Seafile syncing client. **Linux only.**
 
-### File sharing and collaboration
+**Warning:** this workaround is not officially supported by the Seafile project.
 
-1. Sharing folders between users or into groups.
-3. Download links with password protection
-4. Upload links
-5. Version control
+## Installation
 
-### Drive client
+A prebuilt Debian package for x86-64 is available: [seafile-daemon_9.0.16+1_amd64.deb](https://ciovil.li/vari/seafile-daemon_9.0.16+1_amd64.deb).
 
-* Access all files in the cloud via virtual drive.
-* Files are synced on demand.
+The Seafile client is split into three debian packages: `seafile-cli`, `seafile-gui`, and `seafile-daemon`.
+Only the `seafile-daemon` component needs to be updated.
+After installation, it is advisable to set `seafile-daemon` on hold; otherwise, `apt` may revert to the official package during upgrades.
 
-### Privacy protection
+To install:
 
-1. Library encryption with a user chosen password.
-2. Client side encryption when using the desktop syncing.
+```
+sudo dpkg -i seafile-daemon_9.0.16+1_amd64.deb
+sudo apt-mark hold seafile-daemon
+```
 
-### Online documents and knowledge management (New)
+To go back to the version provided by your distribution:
 
-* Online Markdown editing in WYSIWYG way
-* A draft review workflow for online documents
-* Metadata management, including
-  * File labels
-  * Related documents
-* Wiki mode
-* Realtime notifications
+```
+sudo dpkg -r --force-depends seafile-daemon
+sudo apt install seafile-daemon
+```
 
+## Status
 
-## Source repositories for Seafile components
+This is a temporary solution while waiting for an official fix upstream.  
+Use at your own risk and make sure you have backups of your repositories.
 
+## License
 
-Each component of Seafile has its own source code repository on Github.
-
-* Sync client daemon (this repository): https://github.com/haiwen/seafile
-* Sync client GUI: https://github.com/haiwen/seafile-client
-* Server core: https://github.com/haiwen/seafile-server
-* Server web UI: https://github.com/haiwen/seahub
-* iOS app: https://github.com/haiwen/seafile-iOS
-* Android app: https://github.com/haiwen/seadroid
-* WebDAV: https://github.com/haiwen/seafdav
-
-Before version 6.0, the source code of "sync client daemon" and "server core" was mixed together in https://github.com/haiwen/seafile.
-But after 6.0 version, the server core is separated into its own repository.
-For this reason, the sync client daemon repository is still the "front page" for Seafile project on Github.
-
-Build and Run
-=============
-
-See <https://manual.seafile.com/build_seafile/server>
-
-Bug and Feature Request Reports
-===============================
-
-Please only submit bugs in GitHub issues (Pro customers should contact us via Email):
-
-* Server, Web interface (Seahub) and desktop clients: https://github.com/haiwen/seafile/issues
-* Android client: https://github.com/haiwen/seadroid/issues
-* iOS client: https://github.com/haiwen/seafile-iOS/issues
-
-Feature requests can be made and installation/usage problems can be discussed in the forum https://forum.seafile.com/.
-
-Internationalization (I18n)
-===========================
-
-* [Translate Seafile web ui](https://github.com/haiwen/seahub/?tab=readme-ov-file#internationalization-i18n)
-* [Translate Seafile desktop client](https://github.com/haiwen/seafile-client/#internationalization)
-* [Translate Seafile Android app](https://github.com/haiwen/seadroid#internationalization)
-* [Translate Seafile iOS app](https://github.com/haiwen/seafile-ios#internationalization-i18n)
-
-Change Logs
-===========
-
-See <https://manual.seafile.com/changelog/server-changelog/>
-
-
-Why Open Source
-===============
-
-Our primary goal is to build a first-class product. We think this goal can only be achieved by collaborating with the whole world.
-
-
-Contributing
-===========
-
-For more information read [Contribution](https://manual.seafile.com/contribution/).
-
-
-License
-=======
-
-- Seafile iOS client: Apache License v2
-- Seafile Android client: GPLv3
-- Desktop syncing client (this repository): GPLv2
-- Seafile Server core: AGPLv3
-- Seahub (Seafile server Web UI): Apache License v2
-
-Contact
-=======
-
-Twitter: @seafile <https://twitter.com/seafile>
-
-Forum: <https://forum.seafile.com>
+GPLv2
