@@ -5,19 +5,35 @@ Main repository: [haiwen / seafile](https://github.com/haiwen/seafile)
 
 ## Background
 
-Several users have reported **Git repository corruption** when syncing repositories with the official Seafile client. Relevant discussions:
+Several users have reported **Git repository corruption** when syncing repositories with the official Seafile client.
+This issue is related to the Seafile client's file monitoring behavior.
+It is reproducible (see details [here](https://forum.seafile.com/t/handling-of-git-repositories/266/11)) and can lead to silent data corruption.
+
+At the time of writing, the Seafile development team has indicated that they do not plan to change the current behavior.
+
+Details of the bug and the Seafile maintainers' rationale can be found in the following forum thread:
 
 - [Handling of git repositories](https://forum.seafile.com/t/handling-of-git-repositories)
+
+Relevant GitHub issues:
+
 - [GitHub issue #2677](https://github.com/haiwen/seafile/issues/2677)
 - [GitHub issue #2833](https://github.com/haiwen/seafile/issues/2833)
 
-At the time of writing, this issue is considered low priority by the Seafile development team.
-
 ## Purpose
 
-This project provides a **tentative workaround** for the Git corruption issue by offering a modified Seafile syncing client. **Linux only.**
+This project modifies the Linux Seafile client to prevent Git repository corruption caused by the client's file monitoring behavior.
+**Linux only.**
 
-**Warning:** this workaround is not officially supported by the Seafile project.
+**Warning:** this repository is not part of the Seafile project.
+This is an independent modification originally written for personal use and provided without guarantees.
+Use at your own risk and make sure you have backups of your repositories.
+
+## Scope
+
+This modification targets only the `seafile-daemon` component common to the GUI and the command line client on Linux.
+No changes are made to the server or to other client components.
+The modified `seafile-daemon` is intended to remain compatible with the official Seafile server and clients.
 
 ## Installation
 
@@ -40,11 +56,6 @@ To go back to the version provided by your distribution:
 sudo dpkg -r --force-depends seafile-daemon
 sudo apt install seafile-daemon
 ```
-
-## Status
-
-This is a temporary solution while waiting for an official fix upstream.  
-Use at your own risk and make sure you have backups of your repositories.
 
 ## License
 
