@@ -41,8 +41,8 @@ Prebuilt AppImage bundles and a Debian package are available for x86-64 systems.
 
 ### AppImage
 
-GUI client: [Seafile-9.0.16+1-x86_64.AppImage](https://ciovil.li/vari/git-friendly-seafile/Seafile-9.0.16+1-x86_64.AppImage).
-Command line client: [Seafile-cli-9.0.16+1-x86_64.AppImage](https://ciovil.li/vari/git-friendly-seafile/Seafile-cli-9.0.16+1-x86_64.AppImage).
+GUI client: [Seafile-9.0.16+2-x86_64.AppImage](https://ciovil.li/vari/git-friendly-seafile/Seafile-9.0.16+2-x86_64.AppImage).  
+Command line client: [Seafile-cli-9.0.16+2-x86_64.AppImage](https://ciovil.li/vari/git-friendly-seafile/Seafile-cli-9.0.16+2-x86_64.AppImage).
 
 To run an AppImage, follow the [official instructions](https://help.seafile.com/syncing_client/install_linux_client/).
 
@@ -50,7 +50,7 @@ These AppImages are based on the official Seafile AppImage bundles with only the
 
 ### Debian package
 
-A prebuilt Debian package of the modified `seafile-daemon` component is available: [seafile-daemon_9.0.16+1_amd64.deb](https://ciovil.li/vari/git-friendly-seafile/seafile-daemon_9.0.16+1_amd64.deb).
+A prebuilt Debian package of the modified `seafile-daemon` component is available: [seafile-daemon_9.0.16+2_amd64.deb](https://ciovil.li/vari/git-friendly-seafile/seafile-daemon_9.0.16+2_amd64.deb).
 
 The Seafile client is split into several Debian packages: `seafile-cli`, `seafile-gui`, `seafile-daemon`, plus a number of libraries.
 Only the `seafile-daemon` component needs to be updated.
@@ -59,7 +59,7 @@ After installation, it is advisable to set `seafile-daemon` on hold; otherwise, 
 To install:
 
 ```
-sudo dpkg -i seafile-daemon_9.0.16+1_amd64.deb
+sudo dpkg -i seafile-daemon_9.0.16+2_amd64.deb
 sudo apt-mark hold seafile-daemon
 ```
 
